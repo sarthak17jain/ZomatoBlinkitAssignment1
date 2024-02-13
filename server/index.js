@@ -33,6 +33,9 @@ mongoose.connect(db_link)
     console.log(err);
 });
 
+app.use('/auth', authRouter);
+app.use('/image', imageRouter);
+
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static( 'public/build' ));
@@ -42,6 +45,3 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, 'public', 'build', 'index.html')); // relative path
     });
 }
-
-app.use('/auth', authRouter);
-app.use('/image', imageRouter);
