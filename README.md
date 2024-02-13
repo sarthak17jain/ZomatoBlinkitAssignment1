@@ -9,3 +9,11 @@
 ## Live:
 **Check out live webapp at: https://zomatoblinkitassignment1.cyclic.app/**
 
+## Steps to run locally:
+1. Open a terminal at the root of the repository and cd into client. <br>
+2. Write npm install <br>
+3. Open a new terminal at the root of the repository and cd into server. <br>
+4. Write npm install <br>
+5. In the terminal in the server folder write npm start <br>
+6. In the terminal in the client folder write npm start
+
