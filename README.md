@@ -7,5 +7,5 @@
 *Backend*: Node.js, Express.js (Server), MongoDB (Database), Mongoose
 
 ## Live:
-**Check out live webapp at: https://flipkartcloneapp.cyclic.app/**
+**Check out live webapp at: https://zomatoblinkitassignment1.cyclic.app/**
 
