@@ -4,7 +4,11 @@ import { UserContext } from './ContextProvider';
 import { toast } from 'react-toastify';
 
 function PrivateRoutes() {
-    const { account } = useContext(UserContext);
+    const { account, loading } = useContext(UserContext);
+    if(loading){
+        return <Navigate to='/'/>;
+    }
+
     if(account){
         return <Outlet/> 
     }else{

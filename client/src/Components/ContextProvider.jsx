@@ -6,6 +6,7 @@ export const UserContext = createContext(null);
 
 const ContextProvider = ({children}) => {
     const [ account, setAccount ] = useState('');
+    const [ loading, setLoading ] = useState(true); 
     const navigate = useNavigate();
     
     useEffect(()=>{
@@ -27,12 +28,14 @@ const ContextProvider = ({children}) => {
                 setAccount(accountDetails, navigate('/gallery'));
             }catch(error){
                 console.log('error', error);
+            }finally {
+                setLoading(false);
             }
         }
         checkUser();
     }, []);
     return (
-        <UserContext.Provider value={{ account, setAccount }}>
+        <UserContext.Provider value={{ account, setAccount, loading, setLoading }}>
             {children}
         </UserContext.Provider>
     )
