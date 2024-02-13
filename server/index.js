@@ -10,7 +10,6 @@ const authRouter = require('./routes/authRouter.js');
 const imageRouter = require('./routes/imagesRouter.js');
 
 const app = express();
-console.log()
 const PORT = process.env.PORT || 8000;
 const db_link = process.env.DB_LINK;
 console.log(process.env.PORT);
@@ -34,10 +33,6 @@ mongoose.connect(db_link)
     console.log(err);
 });
 
-
-app.use('/auth', authRouter);
-app.use('/image', imageRouter);
-
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static( 'public/build' ));
@@ -47,3 +42,6 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, 'public', 'build', 'index.html')); // relative path
     });
 }
+
+app.use('/auth', authRouter);
+app.use('/image', imageRouter);
