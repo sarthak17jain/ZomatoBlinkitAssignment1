@@ -28,6 +28,8 @@ function AddImage() {
     const { account } = useContext(UserContext);
     const [image, setImage] = useState(null);
     const [previewURL, setPreviewURL] = useState(defaultImage);
+    const [loading, setLoading] = useState(false);
+
     const handleSelectImage = (e) => {
         // e.preventDefault();
         const reader = new FileReader();
@@ -43,6 +45,7 @@ function AddImage() {
     // const navigate = useNavigate();
 
     const handleUploadImage = async () => {
+        setLoading(true);
         const formData = new FormData();
         formData.append('image', image);
         formData.append('userEmail', account.email);
@@ -54,8 +57,20 @@ function AddImage() {
                 },
             });
             console.log(response.data);
+            setLoading(false);
+            toast.success("Image uploaded successfully !", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         } catch (error) {
             console.error(error);
+            setLoading(false);
             toast.error(error, {
                 position: "top-center",
                 autoClose: 5000,
@@ -84,8 +99,8 @@ function AddImage() {
             <strong>Select Image</strong>
         </label> 
 
-        <Button sx={{display:"block", margin: "20px auto", backgroundColor:"rgb(74, 148, 137)"}} variant="contained" onClick={() => handleUploadImage()}>
-            Upload Image
+        <Button sx={{display:"block", margin: "20px auto", backgroundColor:"rgb(74, 148, 137)"}} variant="contained" onClick={() => handleUploadImage()} disabled={loading}>
+            {loading ? 'Uploading...' : 'Upload Image'}
         </Button>
     </div>
   )

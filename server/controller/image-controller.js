@@ -17,7 +17,14 @@ const uploadImage = async (req, res) => {
         return res.status(400).send("No file uploaded");
     }
     
-    cloudinary.uploader.upload(req.file.path, async (error, result) => {
+    // Convert buffer to data URL
+    const file = req.file;
+    const dataUrl = `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
+
+    cloudinary.uploader.upload(dataUrl, async (error, result) => {
+        // Dereference the buffer
+        req.file.buffer = null;
+        
         if (error) {
             return res.status(500).send("Error uploading image");
         }
